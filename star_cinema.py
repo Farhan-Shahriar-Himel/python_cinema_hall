@@ -7,26 +7,26 @@ class Star_Cinema:
 
 class Hall(Star_Cinema):
     def __init__(self, row, cols, hall_no) -> None:
-        self.row = row
-        self.cols = cols
-        self.hall_no = hall_no
-        self.seats = dict()
-        self.show_list = []
+        self.__row = row
+        self.__cols = cols
+        self.__hall_no = hall_no
+        self.__seats = dict()
+        self.__show_list = []
         self.entry_hall(self)        
     
     def entry_show(self, id, movie_name, time):
         info = (id, movie_name, time)
-        self.show_list.append(info)
-        seat_list = [[0] * self.cols for j in range(self.row)]
-        self.seats[id] = seat_list
+        self.__show_list.append(info)
+        seat_list = [[0] * self.__cols for j in range(self.__row)]
+        self.__seats[id] = seat_list
 
     def book_seats(self, id, seat_point):
         row = seat_point[0]
         col = seat_point[1]
-        if id in self.seats:
-            if row < self.row and col < self.cols:
-                if self.seats[id][row][col] != 1:
-                    self.seats[id][seat_point[0]][seat_point[1]] = 1
+        if id in self.__seats:
+            if row < self.__row and col < self.__cols:
+                if self.__seats[id][row][col] != 1:
+                    self.__seats[id][seat_point[0]][seat_point[1]] = 1
                     print("Thank you for being with us")
                 else:
                     print("The seat is already booked")
@@ -37,14 +37,14 @@ class Hall(Star_Cinema):
     
     def view_show_list(self):
         print()
-        for shows in self.show_list:
+        for shows in self.__show_list:
             print(f"movie name : {shows[1]}({shows[0]}) and Time: {shows[2]}")
         print()
 
     def view_available_seats(self, id):
-        if id in self.seats:
+        if id in self.__seats:
             print()
-            for rows in self.seats[id]:
+            for rows in self.__seats[id]:
                 print(rows)
             print()
         else:
