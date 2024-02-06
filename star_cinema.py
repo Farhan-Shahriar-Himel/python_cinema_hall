@@ -19,7 +19,7 @@ class Hall(Star_Cinema):
         self.show_list.append(info)
         seat_list = [[0] * self.cols for j in range(self.row)]
         self.seats[id] = seat_list
-        print("Entry Done")
+
     def book_seats(self, id, seat_point):
         row = seat_point[0]
         col = seat_point[1]
@@ -36,9 +36,9 @@ class Hall(Star_Cinema):
             print("This Movie is not available right now")
     
     def view_show_list(self):
-        print("Shows: ", end=" ")
+        print()
         for shows in self.show_list:
-            print(shows, end=" ")
+            print(f"movie name : {shows[1]}({shows[0]}) and Time: {shows[2]}")
         print()
 
     def view_available_seats(self, id):
@@ -53,29 +53,25 @@ class Hall(Star_Cinema):
 
 
 big_cinema = Hall(10, 10, 1)
+big_cinema.entry_show(1, "jawan", "2.30")
+big_cinema.entry_show(2, "dunki", "4.30")
 
 while True:
-    print("Press 1. to Entry new show")
-    print("Press 2. to Book seats")
-    print("Press 3. to View show list")
-    print("Press 4. to View available seats")
-    print("Press 5. to Exit")
+    print("Press 1. to View show list")
+    print("Press 2. to View available seats")
+    print("Press 3. to Book ticket")
+    print("Press 4. to Exit")
     choice = input()
     if choice == '1':
-        movie_id = int(input("Enter movie id: "))
-        movie_title = input("Enter movie_name: ")
-        movie_time = input("Enter movie time: ")
-        big_cinema.entry_show(movie_id, movie_title, movie_time)
+        big_cinema.view_show_list()
     elif choice == '2':
+        movie_id = int(input("Enter movie id: "))
+        big_cinema.view_available_seats(movie_id)
+    elif choice == '3':
         movie_id = int(input("Enter movie id: "))
         seat_row = int(input("Enter row: "))
         seat_col = int(input("Enter col: "))
         seat = (seat_row, seat_col)
         big_cinema.book_seats(movie_id, seat)
-    elif choice == '3':
-        big_cinema.view_show_list()
-    elif choice == '4':
-        movie_id = int(input("Enter movie id: "))
-        big_cinema.view_available_seats(movie_id)
     else:
         break
